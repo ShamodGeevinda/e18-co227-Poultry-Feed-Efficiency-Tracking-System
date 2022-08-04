@@ -52,7 +52,7 @@ class _DeleteMortalState extends State<DeleteMortal>
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "addfeedIntake".tr,
+            "Delete Mortality".tr,
             style: TextStyle(fontSize: 16),
           ),
           backgroundColor: mPrimaryColor,
@@ -303,7 +303,7 @@ class _DeleteMortalState extends State<DeleteMortal>
 
         if (!snapshot.exists) {
           print("done 1 before");
-          documentReference.set({'Amount': value});
+          //documentReference.set({'Amount': value});
           print("done 1");
 
           //return true;
@@ -311,9 +311,18 @@ class _DeleteMortalState extends State<DeleteMortal>
           try {
             //num newAmount = snapshot.data()!['Amount'] + value;
             current = snapshot.data()!['Amount'];
+
             transaction.update(documentReference, {'Amount': value});
             print("done 1.2");
             print(current);
+            // FirebaseFirestore.instance
+            //     .collection('Farmers')
+            //     .doc(FirebaseAuth.instance.currentUser!.uid)
+            //     .collection('flock')
+            //     .doc(id)
+            //     .collection('Mortality')
+            //     .doc(date)
+            //     .delete();
             //return true;
           } catch (e) {
             //rethrow;
