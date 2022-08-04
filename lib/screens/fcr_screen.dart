@@ -36,10 +36,14 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
   bool toggle = false;
   late AnimationController _animationController;
   int mortal = 0, s_count = 0;
+<<<<<<< HEAD
+  String totalChick = '', strain = '';
+=======
   String totalChick = '';
   int days = 0;
   num idealWeightperchick = 0;
   num idealFeedperchick = 0;
+>>>>>>> 2ab7fb82a3aa48aca97b0bbe113771059f0ee0dd
   // num feedbag = 0, bagWeight = 0;
   // num avgWeight = 0;
 
@@ -57,6 +61,33 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     return Stack(
       children: [
+<<<<<<< HEAD
+        StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('Farmers')
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .collection('flock')
+                .where(FieldPath.documentId, isEqualTo: args.flockID)
+                .snapshots(), // your stream url,
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (!snapshot.hasData) {
+                return CircularProgressIndicator();
+              } else {
+                //print(snapshot.toString());
+                mortal = snapshot.data?.docs[0]['Mortal'];
+                totalChick = snapshot.data?.docs[0]['count'];
+                strain = snapshot.data?.docs[0]['strain'];
+                s_count = int.parse(totalChick);
+                print(mortal);
+                print(totalChick);
+                print(strain);
+              }
+
+              return Container(); // Your grid code.
+            }),
+=======
+>>>>>>> 2ab7fb82a3aa48aca97b0bbe113771059f0ee0dd
         //Feed intake
         // StreamBuilder(
         //     stream: FirebaseFirestore.instance
@@ -149,13 +180,30 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                     },
                     //icon: Icon(Icons.menu),
                   ),
-                  title: Text("FCR CALCULATION"),
+                  title: Text("FCRCalculation".tr),
                   backgroundColor: mPrimaryColor,
                 ),
                 body: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+<<<<<<< HEAD
+                    //reuseTextField("Mortality"),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FCRManualScreen(
+                                mortalNavi: mortal,
+                                totalChicksNavi: totalChick,
+                                strainNavi: strain,
+                              ),
+=======
                     StreamBuilder(
                         stream: FirebaseFirestore.instance
                             .collection('Farmers')
@@ -258,7 +306,7 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    child: Text("Calculate FCR"),
+                                    child: Text("calculatefcr".tr),
                                   ),
                                 ),
                                 SizedBox(
@@ -269,7 +317,7 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "   Start Date: ",
+                                      "startdate".tr,
                                       style: TextStyle(
                                           fontSize: 15, color: mPrimaryColor),
                                     ),
@@ -297,7 +345,7 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "   Type: ",
+                                      "type".tr,
                                       style: TextStyle(
                                           fontSize: 15, color: mPrimaryColor),
                                     ),
@@ -325,7 +373,7 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "   Days: ",
+                                      "days".tr,
                                       style: TextStyle(
                                           fontSize: 15, color: mPrimaryColor),
                                     ),
@@ -353,7 +401,7 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "   Ideal weight of a chick: ",
+                                      "idealWeight".tr,
                                       style: TextStyle(
                                           fontSize: 15, color: mPrimaryColor),
                                     ),
@@ -381,7 +429,7 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "   Ideal feed weight per chick: ",
+                                      "idealFeed".tr,
                                       style: TextStyle(
                                           fontSize: 15, color: mPrimaryColor),
                                     ),
@@ -417,7 +465,7 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                                             BorderRadius.circular(10.0),
                                       ),
                                       child: Text(
-                                        "Expected FCR: " +
+                                        "expectedfcr".tr +
                                             (idealFeedperchick /
                                                     idealWeightperchick)
                                                 .toStringAsPrecision(3),
@@ -426,6 +474,7 @@ class _FCRScreenState extends State<FCRScreen> with TickerProviderStateMixin {
                                       )),
                                 ),
                               ]),
+>>>>>>> 2ab7fb82a3aa48aca97b0bbe113771059f0ee0dd
                             ),
                           ); // Your grid code.
                         }),
